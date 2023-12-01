@@ -1,6 +1,6 @@
 {
   "name": "@rh-nestjs-shopify/core",
-  "version": "4.0.9",
+  "version": "4.1.0",
   "type": "commonjs",
   "homepage": "https://github.com/RockyHubJsc/nestjs-shopify",
   "bugs": {
