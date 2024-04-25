@@ -6,6 +6,8 @@ import { MemorySessionStorage } from './session-storage/memory.session-storage';
 
 const logger = new Logger('Shopify API');
 
+export const PREFIX_PARAM_SCOPE = 'scope';
+
 @Module({
   imports: [
     ShopifyCoreModule.forRootAsync({
@@ -19,13 +21,15 @@ const logger = new Logger('Shopify API');
         isEmbeddedApp: true,
         isPrivateApp: false,
         scopes: ['write_products'],
-        sessionStorage,
+        sessionStorage: sessionStorage as any,
         logger: {
           log: async (_severity, msg) => logger.log(msg),
           httpRequests: false,
           level: LogSeverity.Error,
           timestamps: false,
         },
+        multiScopes: [{ key: 'default', scopes: ['write_products'] }],
+        prefixParamScope: PREFIX_PARAM_SCOPE,
       }),
       inject: [MemorySessionStorage],
     }),

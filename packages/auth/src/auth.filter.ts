@@ -43,8 +43,7 @@ export class ShopifyAuthExceptionFilter
   async catch(
     exception: ShopifyAuthException | HttpResponseError,
     host: ArgumentsHost,
-  ) {
-    this.logger.debug('[ShopifyAuthException]');
+  ) { 
     const context = host.switchToHttp();
     const request =
       context.getRequest<
@@ -100,11 +99,7 @@ export class ShopifyAuthExceptionFilter
     ) as Shopify;
 
     const shopInfo = await this.sessionStorage.loadShopByDomain(exception.shop);
-    this.logger.debug({ shopInfo });
-
     if (shopInfo && shopInfo?.addedScopes) {
-      this.logger.debug('Shop addedScopes : ', shopInfo?.addedScopes);
-
       const prefix = getPrefixRedirectAuth(
         this.shopifyCoreOptions.multiScopes,
         shopInfo.addedScopes,

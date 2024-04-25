@@ -42,7 +42,7 @@ describe('ShopifyCspMiddleware', () => {
 
     app = await module.createNestApplication().init();
 
-    shopifyApi = module.get<Shopify>(SHOPIFY_API_CONTEXT);
+    shopifyApi = module.get(SHOPIFY_API_CONTEXT).getInstance();
   });
 
   afterEach(async () => {

@@ -25,11 +25,12 @@ describe('Hybrid Authz (e2e)', () => {
       .overrideProvider(MemorySessionStorage)
       .useValue({
         loadSession: jest.fn(),
+        loadShopByDomain: jest.fn(),
       })
       .compile();
 
     app = await module.createNestApplication().init();
-    shopifyApi = module.get(SHOPIFY_API_CONTEXT);
+    shopifyApi = module.get(SHOPIFY_API_CONTEXT).getInstance();
     sessionStorage = module.get(SHOPIFY_API_SESSION_STORAGE);
   });
 
@@ -67,6 +68,9 @@ describe('Hybrid Authz (e2e)', () => {
 
     beforeEach(async () => {
       sessionStorage.loadSession.mockResolvedValueOnce(session);
+      sessionStorage.loadShopByDomain.mockResolvedValueOnce({
+        addedScopes: '',
+      });
 
       token = jwt.sign(jwtPayload, shopifyApi.config.apiSecretKey, {
         algorithm: 'HS256',

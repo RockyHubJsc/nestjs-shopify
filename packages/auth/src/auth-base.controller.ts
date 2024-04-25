@@ -1,6 +1,7 @@
 import { Controller, Get, Param, Query, Req, Res } from '@nestjs/common';
 import { ApplicationConfig } from '@nestjs/core';
 import {
+  DEFAULT_INSTANCE,
   SessionStorage,
   ShopifyCoreOptions,
   ShopifyFactory,
@@ -42,7 +43,8 @@ export abstract class ShopifyAuthBaseController {
     }
 
     const scope =
-      param?.[`${this.shopifyCoreOptions.prefixParamScope || ''}`] || '';
+      param?.[`${this.shopifyCoreOptions.prefixParamScope || ''}`] ||
+      DEFAULT_INSTANCE;
 
     let callbackPath = joinUrl(globalPrefix, basePath, 'callback');
     callbackPath = buildAuthParamScopePath(
@@ -71,7 +73,8 @@ export abstract class ShopifyAuthBaseController {
     const res = response instanceof ServerResponse ? response : response.raw;
 
     const scope =
-      param?.[`${this.shopifyCoreOptions.prefixParamScope || ''}`] || '';
+      param?.[`${this.shopifyCoreOptions.prefixParamScope || ''}`] ||
+      DEFAULT_INSTANCE;
 
     const { headers = {}, session } = await (
       this.shopifyFactory.getInstance(scope) as Shopify

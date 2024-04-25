@@ -15,7 +15,7 @@ describe('GraphQL proxy', () => {
     app = await createTestApp();
     await app.init();
 
-    shopifyApi = app.get(SHOPIFY_API_CONTEXT);
+    shopifyApi = app.get(SHOPIFY_API_CONTEXT).getInstance();
 
     graphqlProxySpy = jest.spyOn(shopifyApi.clients, 'graphqlProxy');
   });

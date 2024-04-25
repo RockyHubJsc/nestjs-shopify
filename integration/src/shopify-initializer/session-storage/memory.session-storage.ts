@@ -1,9 +1,16 @@
-import { SessionStorage } from '@rh-nestjs-shopify/core';
+import { SessionStorage, ShopInterface } from '@rh-nestjs-shopify/core';
 import { Injectable } from '@nestjs/common';
 import { Session } from '@shopify/shopify-api';
 
 @Injectable()
 export class MemorySessionStorage implements SessionStorage {
+  loadShopByDomain(domain: string): Promise<ShopInterface> {
+    return Promise.resolve({ addedScopes: domain });
+  }
+  loadShopById(id: number): Promise<ShopInterface> {
+    return Promise.resolve({ addedScopes: `${id}` });
+  }
+
   private readonly sessions = new Map<string, Session>();
 
   async storeSession(session: Session): Promise<boolean> {

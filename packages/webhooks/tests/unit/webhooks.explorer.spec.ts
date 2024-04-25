@@ -46,7 +46,7 @@ describe('ShopifyWebhooksExplorer', () => {
 
     service = module.get(ShopifyWebhooksExplorer);
     appConfig = module.get(ApplicationConfig);
-    shopifyApi = module.get<Shopify>(SHOPIFY_API_CONTEXT);
+    shopifyApi = module.get(SHOPIFY_API_CONTEXT).getInstance();
 
     // We mock the webhooks call to make sure nothing gets registered
     jest

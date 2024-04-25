@@ -23,7 +23,7 @@ describe('ShopifyCoreModule', () => {
     });
 
     it('should provide Shopify context', () => {
-      const shopify = moduleRef.get<Shopify>(SHOPIFY_API_CONTEXT);
+      const shopify: Shopify = moduleRef.get(SHOPIFY_API_CONTEXT).getInstance();
 
       expect(shopify).toBeDefined();
     });
@@ -49,7 +49,7 @@ describe('ShopifyCoreModule', () => {
     });
 
     it('should provide Shopify context', () => {
-      const shopify = moduleRef.get<Shopify>(SHOPIFY_API_CONTEXT);
+      const shopify: Shopify = moduleRef.get(SHOPIFY_API_CONTEXT).getInstance();
 
       expect(shopify).toBeDefined();
     });

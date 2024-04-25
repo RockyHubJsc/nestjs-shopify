@@ -16,6 +16,7 @@ import {
   mockedShopifyCoreOptions,
   MockShopifyCoreModule,
 } from '../helpers/mock-shopify-core-module';
+import { ShopifyFactory } from '../../src';
 
 describe('ShopifyHmacGuard', () => {
   let guard: ShopifyHmacGuard;
@@ -38,7 +39,7 @@ describe('ShopifyHmacGuard', () => {
       })
       .overrideProvider(SHOPIFY_API_CONTEXT)
       .useValue(
-        shopifyApi({
+        new ShopifyFactory({
           ...mockedShopifyCoreOptions,
           apiSecretKey: 'foobar',
         }),

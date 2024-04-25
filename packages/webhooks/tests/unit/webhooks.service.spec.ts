@@ -31,7 +31,7 @@ describe('ShopifyWebhooksService', () => {
     }).compile();
 
     service = module.get(ShopifyWebhooksService);
-    shopifyApi = module.get(SHOPIFY_API_CONTEXT);
+    shopifyApi = module.get(SHOPIFY_API_CONTEXT).getInstance();
 
     (service as unknown as { logger: Logger }).logger = mockLogger;
 
