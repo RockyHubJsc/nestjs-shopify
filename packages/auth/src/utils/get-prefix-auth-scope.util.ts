@@ -1,6 +1,5 @@
 import { MultiScopes } from '@rh-nestjs-shopify/core';
 import { Session } from '@shopify/shopify-api';
-import { AuthScopes } from '@shopify/shopify-api/lib/auth/scopes';
 
 /**
  *
@@ -83,11 +82,7 @@ export const getPrefixRedirectAuth = (
       return getImpliedScopes(value.scopes as string[]).includes(scope);
     });
     if (check === true) {
-      if (value.scopes instanceof AuthScopes) {
-        cbs.push({ key: value.key, length: value.scopes.toArray().length });
-      } else {
-        cbs.push({ key: value.key, length: value.scopes.length });
-      }
+      cbs.push({ key: value.key, length: value.scopes.length });
     }
   }
   return cbs.sort((a, b) => a.length - b.length)[0].key || '';
